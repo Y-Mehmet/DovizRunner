@@ -1,15 +1,21 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class RunnerPlayerController : MonoBehaviour
+public class RunnerPlayerController : MonoBehaviour,ICollectible
 {
-    public float speed = 5f; // Ýleri gitme hýzý
-    public float laneDistance = 4f; // Þeritler arasý mesafe
+    public float speed = 5f;  // Ýleri gitme hýzý
+    public float minX = -4f;  // X ekseninin sol sýnýrý
+    public float maxX = 4f;   // X ekseninin sað sýnýrý
+    public float moveSpeed = 2f; // Sað/sol hareket hýzý
 
-    private int currentLane = 1; // 0: Sol, 1: Orta, 2: Sað
     private Vector3 targetPosition;
     private PlayerInput playerInput;
     private InputAction moveAction;
+    public GameObject supporterPrefab;  // Destekçi objesi prefab'ý
+   // public Transform supporterSpawnPoint;  // Destekçilerin spawn edileceði nokta
+    public float supporterDistance = -.2f;  // Destekçilerin aralarýndaki mesafe
+
+    private int supporterCount = 0;  // Þu anda oyuncunun sahip olduðu destekçi sayýsý
 
     private void Awake()
     {
@@ -31,21 +37,53 @@ public class RunnerPlayerController : MonoBehaviour
     private void Update()
     {
         // Sürekli ileri git
-        targetPosition = new Vector3(currentLane * laneDistance - laneDistance, transform.position.y, transform.position.z + speed * Time.deltaTime);
-        transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * 10f);
+        transform.position += Vector3.forward * speed * Time.deltaTime;
+
+        // Yumuþak hareket ile x ekseninde hareket et
+        transform.position = new Vector3(Mathf.Clamp(transform.position.x, minX, maxX), transform.position.y, transform.position.z);
     }
 
     private void OnMove(InputAction.CallbackContext context)
     {
-        Vector2 input = context.ReadValue<Vector2>(); // Vector2 olarak oku
+        // X eksenindeki hareketi al
+        float moveInput = context.ReadValue<Vector2>().x;
 
-        if (input.x > 0 && currentLane < 2)
+        // X pozisyonunu güncelle
+        transform.position += Vector3.right * moveInput * moveSpeed * Time.deltaTime;
+    }
+    public void SpawnSupporters(int count)
+    {
+        for (int i = 0; i < count; i++)
         {
-            currentLane++;
+            // Singleton üzerinden havuzdan destekçiyi al
+            GameObject supporter = SupporterPool.Instance.GetSupporter();
+
+            // Destekçiyi oyuncunun etrafýna spawn et
+            Vector3 spawnPosition = transform.position + new Vector3(i * supporterDistance, 0, 0);
+            supporter.transform.position = spawnPosition;
         }
-        else if (input.x < 0 && currentLane > 0)
-        {
-            currentLane--;
-        }
+
+        supporterCount += count;
+       // Debug.Log("Destekçi sayýsý: " + supporterCount);
+    }
+
+    // Destekçi kaybetme fonksiyonu
+    public void LoseSupporters(int count)
+    {
+        supporterCount = Mathf.Max(0, supporterCount - count);  // Destekçi sayýsýný kaybet, negatif olmasýn
+        SupporterPool.Instance.ReturnSupporter( count);
+       // Debug.Log("Kaybedilen destekçi sayýsý: " + count);
+    }
+
+    
+    public void OnCollect(int count = 1)
+    {
+        SpawnSupporters(count);  // Destekçileri kazan
+    }
+
+    public void DeCollect(int count = 1)
+    {
+       LoseSupporters(count);  // Destekçileri kaybet
+        //Debug.Log("Destekçi kaybedildi: " + count);
     }
 }
