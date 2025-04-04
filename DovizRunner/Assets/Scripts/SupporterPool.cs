@@ -55,7 +55,7 @@ public class SupporterPool : MonoBehaviour
     // Bir destekçiyi havuza geri koy
     public void ReturnSupporter(int count)
     {
-        if(activeSupporterPool.Count == 0) return;  // Eðer aktif havuzda destekçi yoksa çýk
+        if(activeSupporterPool.Count == 0 ||  count ==0) return;  // Eðer aktif havuzda destekçi yoksa çýk
         count= activeSupporterPool.Count < count ? activeSupporterPool.Count : count; // Eðer havuzda yeterli destekçi yoksa, mevcut olaný kullan
         for (int i = 0; i < count; i++)
         {

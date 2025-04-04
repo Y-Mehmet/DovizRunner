@@ -9,7 +9,7 @@ public class Supporter : MonoBehaviour, ICollectible
 
     public void DeCollect(int count = 1)
     {
-        SupporterPool.Instance.ReturnSupporterGameobject(gameObject);  // Destekçiyi havuza geri döndür
+      // SupporterPool.Instance.ReturnSupporterGameobject(gameObject);  // Destekçiyi havuza geri döndür
     }
 
 
