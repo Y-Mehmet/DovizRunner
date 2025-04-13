@@ -101,7 +101,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ps: {fileID: 4497910615675442827}
-  onDuration: 2
+  onDuration: 22
   minOffDuration: 0.5
   maxOffDuration: 2
 --- !u!1001 &4371630970434637383
@@ -205,6 +205,10 @@ PrefabInstance:
       value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 198421077076039884, guid: bccc7a794e75b2a44a4b0dac69160b7b, type: 3}
+      propertyPath: CollisionModule.collidesWith.m_Bits
+      value: 64
+      objectReference: {fileID: 0}
+    - target: {fileID: 198421077076039884, guid: bccc7a794e75b2a44a4b0dac69160b7b, type: 3}
       propertyPath: InitialModule.startLifetime.minScalar
       value: 1
       objectReference: {fileID: 0}
@@ -239,6 +243,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cf9900dc24d06440b837643340f45b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  destructionChance: 3
 --- !u!198 &4497910615675442827 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 198421077076039884, guid: bccc7a794e75b2a44a4b0dac69160b7b, type: 3}

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 91e9f8f1059006d49bb30034ce024b81
+guid: f448b0462656d104187edc2ea85d329f
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -19,26 +19,6 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: standardSurface4
     second: {fileID: 2100000, guid: 71cf091df3c96ed4996481ef2169e670, type: 2}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Pikachu2
-    second: {fileID: 2800000, guid: 01b0bea4d09f77e4d8a527aa4581f20a, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Pikachu3
-    second: {fileID: 2800000, guid: 3b685d483115c6f44941ccbf770247aa, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Pikachu4
-    second: {fileID: 2800000, guid: 67a4e41a8ab978541b00c3c6eb14f0ac, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: PikachuFront
-    second: {fileID: 2800000, guid: e28f9b5c4383c5a4599424297507dc1e, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -50,7 +30,7 @@ ModelImporter:
     resampleCurves: 1
     optimizeGameObjects: 0
     removeConstantScaleCurves: 0
-    motionNodeName: <Root Transform>
+    motionNodeName: 
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 
@@ -66,11 +46,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Fast Run
+      name: mixamo.com
       takeName: mixamo.com
       internalID: -203655887218126122
       firstFrame: 0
-      lastFrame: 31
+      lastFrame: 16
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -97,7 +77,7 @@ ModelImporter:
     isReadable: 0
   meshes:
     lODScreenPercentages: []
-    globalScale: 100
+    globalScale: 50
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
@@ -152,7 +132,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 100
+    globalScale: 50
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0

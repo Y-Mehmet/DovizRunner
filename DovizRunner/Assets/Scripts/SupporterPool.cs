@@ -1,79 +1,167 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using System.Collections.Generic;
+using System.Linq;
+using System.IO;
+using System.Collections;
+using System; // Coroutine kullanmak iÃ§in ekledik
 
 public class SupporterPool : MonoBehaviour
 {
-    public static SupporterPool Instance { get; private set; }  // Singleton instance
+    public static SupporterPool Instance { get; private set; }
 
-    public GameObject supporterPrefab;  // Destekçi prefab'ý
-    public int poolSize = 10;  // Havuzda bulundurulacak destekçi sayýsý
-    private Queue<GameObject> supporterPool = new Queue<GameObject>();  // Destekçileri tutacak havuz
-    private Queue<GameObject> activeSupporterPool = new Queue<GameObject>();  // Destekçileri tutacak havuz
+    public GameObject supporterPrefab;
+    public Transform playerTransform;
+    public float initialRadius = 1f;
+    public float radius = 0.05f;
+    public int poolSize = 100;
+    private Queue<GameObject> supporterPool = new Queue<GameObject>();
+    private List<GameObject> activeSupporters = new List<GameObject>();
+    private List<Vector3> supporterOffsets = new List<Vector3>();
+
+    public float rotationSpeed = 30f; // derece/saniye
+    private float spreadMultiplier = 1f;
+    public float maxSpread = 3f;
+    public float spreadSpeed = 1f;
+    private bool isSpreading = false;
+    public float spreadDuration = 5f; // YayÄ±lma sÃ¼resi (saniye)
+    public Action onActiveSupporterCountChanged;
+
 
     private void Awake()
     {
-        // Eðer Instance daha önce atanmýþsa ve baþka bir kopya varsa, yok et.
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
             return;
         }
+        Instance = this;
+      
 
-        Instance = this; // Singleton instance'ý ayarla
-        DontDestroyOnLoad(gameObject); // Sahne deðiþtiðinde yok olmasýný engelle
-
-        // Havuzu oluþtur
         for (int i = 0; i < poolSize; i++)
         {
             GameObject supporter = Instantiate(supporterPrefab);
-            supporter.SetActive(false);  // Baþlangýçta pasif hale getir
-            supporterPool.Enqueue(supporter);  // Havuz listesine ekle
+            supporter.SetActive(false);
+            supporterPool.Enqueue(supporter);
+            SetSupporerParent(playerTransform.gameObject, supporter);
         }
     }
-
-    // Havuzdan bir destekçi al
-    public GameObject GetSupporter()
+    private void Start()
     {
-        if (supporterPool.Count > 0)
+        onActiveSupporterCountChanged?.Invoke(); // ðŸ”” BURAYA EKLEDÄ°K
+    }
+    public void SetSupporerParent(GameObject parent, GameObject child)
+    {
+        child.transform.SetParent(parent.transform);
+        child.transform.localRotation = Quaternion.identity;
+    }
+
+    private void Update()
+    {
+        if (playerTransform == null) return;
+
+        if (isSpreading)
         {
-            GameObject supporter = supporterPool.Dequeue();  // Havuzdan bir destekçi al
-            supporter.SetActive(true);  // Aktif hale getir
-            activeSupporterPool.Enqueue(supporter);
-            return supporter;
+            spreadMultiplier = Mathf.MoveTowards(spreadMultiplier, maxSpread, Time.deltaTime * spreadSpeed);
+            // YayÄ±lma tamamlandÄ±ÄŸÄ±nda isSpreading'i false yapma iÅŸlemi Coroutine'da gerÃ§ekleÅŸecek
         }
         else
         {
-            // Eðer havuzda destekçi kalmazsa, yeni bir tane oluþtur
-            GameObject supporter = Instantiate(supporterPrefab);
-            activeSupporterPool.Enqueue(supporter);
-            return supporter;
-
+            spreadMultiplier = Mathf.MoveTowards(spreadMultiplier, 1f, Time.deltaTime * spreadSpeed * 2f); // Geri toplanma hÄ±zÄ±
         }
-          // Aktif destekçileri tutacak havuza ekle
+
+     
+        
+        for (int i = 0; i < activeSupporters.Count; i++)
+        {
+            
+            Vector3 rotated = supporterOffsets[i];
+            Vector3 scaled = rotated * spreadMultiplier;
+            activeSupporters[i].transform.position = playerTransform.position + scaled;
+            supporterOffsets[i] = rotated; // GÃ¼ncellenmiÅŸ rotasyonu sakla
+        }
     }
 
-    // Bir destekçiyi havuza geri koy
+    public void TriggerSpread()
+    {
+        isSpreading = true;
+        StartCoroutine(ResetSpreadAfterDelay(spreadDuration));
+    }
+
+    private IEnumerator ResetSpreadAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        isSpreading = false;
+    }
+
+    private void SetSuppoerterPos()
+    {
+        int activeCount = activeSupporters.Count;
+        supporterOffsets.Clear();
+
+        if (activeCount == 0 || playerTransform == null) return;
+
+        float currentRadius = initialRadius * Mathf.Sqrt(activeCount);
+        for (int i = 0; i < activeCount; i++)
+        {
+            Vector2 randomOffset = UnityEngine.Random.insideUnitCircle * currentRadius;
+            Vector3 offset = new Vector3(randomOffset.x, 0f, -Mathf.Abs(randomOffset.y)-.5f);
+            supporterOffsets.Add(offset);
+            activeSupporters[i].transform.localPosition = offset; // ArtÄ±k localPosition'Ä± ayarlÄ±yoruz Ã§Ã¼nkÃ¼ parent'a baÄŸlÄ±lar
+        }
+    }
+
+    public GameObject GetSupporter()
+    {
+        GameObject supporter = null;
+        if (supporterPool.Count > 0)
+        {
+            supporter = supporterPool.Dequeue();
+        }
+        else
+        {
+            supporter = Instantiate(supporterPrefab);
+        }
+
+        supporter.SetActive(true);
+        activeSupporters.Add(supporter);
+        SetSupporerParent(playerTransform.gameObject, supporter);
+        SetSuppoerterPos();
+        onActiveSupporterCountChanged?.Invoke(); // ðŸ”” BURAYA EKLEDÄ°K
+        return supporter;
+    }
+
     public void ReturnSupporter(int count)
     {
-        if(activeSupporterPool.Count == 0 ||  count ==0) return;  // Eðer aktif havuzda destekçi yoksa çýk
-        count= activeSupporterPool.Count < count ? activeSupporterPool.Count : count; // Eðer havuzda yeterli destekçi yoksa, mevcut olaný kullan
+        if (activeSupporters.Count == 0 || count == 0) return;
+        count = Mathf.Min(activeSupporters.Count, count);
+
         for (int i = 0; i < count; i++)
         {
-            GameObject gameObject = activeSupporterPool.Dequeue();  // Aktif havuzdan bir destekçi al
+            GameObject supporterToReturn = activeSupporters.First();
+            activeSupporters.RemoveAt(0);
+            supporterOffsets.RemoveAt(0);
+            supporterToReturn.SetActive(false);
+            supporterPool.Enqueue(supporterToReturn);
 
-            gameObject.SetActive(false);  // Pasif hale getir
-            supporterPool.Enqueue(gameObject);  // Havuzun içine geri ekle
         }
-     
+        onActiveSupporterCountChanged?.Invoke(); // ðŸ”” BURAYA EKLEDÄ°K
+        SetSuppoerterPos();
     }
+
     public void ReturnSupporterGameobject(GameObject obj)
     {
-        
-           
-
-            obj.SetActive(false);  // Pasif hale getir
-            supporterPool.Enqueue(obj);  // Havuzun içine geri ekle
-        Debug.Log("coll ile sportur silindi");
-        
+        int index = activeSupporters.IndexOf(obj);
+        if (index >= 0)
+        {
+            activeSupporters.RemoveAt(index);
+            supporterOffsets.RemoveAt(index);
+            obj.SetActive(false);
+            supporterPool.Enqueue(obj);
+            SetSuppoerterPos();
+            onActiveSupporterCountChanged?.Invoke(); // ðŸ”” BURAYA EKLEDÄ°K
+            Debug.Log("coll ile supporter silindi");
+        }
     }
+    public int GetActiveCount() => activeSupporters.Count;
+
 }

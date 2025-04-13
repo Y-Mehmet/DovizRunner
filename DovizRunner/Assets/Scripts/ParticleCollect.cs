@@ -8,16 +8,15 @@ public class ParticleCollect : MonoBehaviour
         ICollectible icoll = other.GetComponent<ICollectible>();
         if (icoll != null)  // Eðer oyuncu kapýya çarptýysa
         {
-            int randomValue = Random.Range(0, 100);
-            if (true)
-            {
-                icoll.DeCollect(1);
-              //  Debug.LogWarning("ParticleCollect:  destruction");
-            }
-            else
-            {
-                Debug.Log("ParticleCollect: No destruction");
-            }
+
+            Debug.Log("collcect fith particale "+other.name);
+            icoll.DeCollect(1);
+
+               
+            
+        }else
+        {
+            Debug.Log(other.name);
         }
        
         

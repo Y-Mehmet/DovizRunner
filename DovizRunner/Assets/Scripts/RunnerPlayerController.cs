@@ -6,7 +6,7 @@ public class RunnerPlayerController : MonoBehaviour, ICollectible
     public float speed = 5f;         // Ýleri gitme hýzý
     public float minX = -4f;         // X ekseninin sol sýnýrý
     public float maxX = 4f;          // X ekseninin sað sýnýrý
-    public float moveSpeed = 2f;     // Sað/sol hareket hýzý
+    public float xMoveSpeed = .7f;     // Sað/sol hareket hýzý
 
     private Vector3 targetPosition;
     private PlayerInput playerInput;
@@ -27,16 +27,23 @@ public class RunnerPlayerController : MonoBehaviour, ICollectible
         moveAction.performed += OnMove;
         moveAction.canceled += OnStopMove;
     }
-
     private void OnEnable()
     {
         moveAction.Enable();
+
+      
     }
 
     private void OnDisable()
     {
         moveAction.Disable();
+
+      
     }
+
+  
+
+
 
     private void OnMove(InputAction.CallbackContext context)
     {
@@ -51,7 +58,7 @@ public class RunnerPlayerController : MonoBehaviour, ICollectible
     private void FixedUpdate()
     {
         // X ve Y yönünde hareket belirle
-        float newX = moveInputX * moveSpeed;
+        float newX = moveInputX * xMoveSpeed;
         float newY = speed;
 
         // Rigidbody'ye velocity uygula

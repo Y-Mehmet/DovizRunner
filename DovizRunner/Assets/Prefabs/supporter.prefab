@@ -81,13 +81,7 @@ PrefabInstance:
       addedObject: {fileID: 651314739563983741}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 91e9f8f1059006d49bb30034ce024b81, type: 3}
       insertIndex: -1
-      addedObject: {fileID: -927093994871646044}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 91e9f8f1059006d49bb30034ce024b81, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 6190032986911734501}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 91e9f8f1059006d49bb30034ce024b81, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1638191114046403802}
+      addedObject: {fileID: 1536003394061259824}
   m_SourcePrefab: {fileID: 100100000, guid: 91e9f8f1059006d49bb30034ce024b81, type: 3}
 --- !u!1 &7597464081603945982 stripped
 GameObject:
@@ -116,22 +110,8 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &-927093994871646044
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7597464081603945982}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 56e7573b54db3d54a90fc88b5c0798ea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  followSpeed: 2
-  followDistance: 2
---- !u!136 &6190032986911734501
-CapsuleCollider:
+--- !u!65 &1536003394061259824
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -148,35 +128,6 @@ CapsuleCollider:
   m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 1.7985498
-  m_Height: 5.248749
-  m_Direction: 1
-  m_Center: {x: -0.2438606, y: 2.1243744, z: 0}
---- !u!54 &1638191114046403802
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7597464081603945982}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
+  serializedVersion: 3
+  m_Size: {x: 2, y: 4, z: 1}
+  m_Center: {x: -0.2, y: 2, z: 0}
