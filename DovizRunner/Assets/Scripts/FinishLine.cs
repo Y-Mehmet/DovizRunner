@@ -6,7 +6,10 @@ public class FinishLine : MonoBehaviour
     {
         if (other.GetComponent<ICollectible>()!= null)
         {
-            SceneCycleManager.Instance.LoadNextScene();
+           
+           
+            LoadingUI.Instance.ActivetedNextLevelPanel();
+
         }
     }
 }

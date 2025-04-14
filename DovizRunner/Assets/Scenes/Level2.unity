@@ -333,10 +333,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8619127812004967444, guid: 1458d0d17b479534aaccd23ad5056a11, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 450
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -361,7 +357,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 189370687806371570, guid: a31e2cfc6f490dd479da7e734d47875a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -3.44
       objectReference: {fileID: 0}
     - target: {fileID: 189370687806371570, guid: a31e2cfc6f490dd479da7e734d47875a, type: 3}
       propertyPath: m_LocalPosition.z
@@ -393,6 +389,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 189370687806371570, guid: a31e2cfc6f490dd479da7e734d47875a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3183344079684675678, guid: a31e2cfc6f490dd479da7e734d47875a, type: 3}
+      propertyPath: lengthInSec
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3183344079684675678, guid: a31e2cfc6f490dd479da7e734d47875a, type: 3}
+      propertyPath: simulationSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3183344079684675678, guid: a31e2cfc6f490dd479da7e734d47875a, type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3183344079684675678, guid: a31e2cfc6f490dd479da7e734d47875a, type: 3}
+      propertyPath: InitialModule.startLifetime.minMaxState
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5219452066469511629, guid: a31e2cfc6f490dd479da7e734d47875a, type: 3}

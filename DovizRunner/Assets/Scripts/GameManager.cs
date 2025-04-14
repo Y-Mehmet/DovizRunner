@@ -2,15 +2,26 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public static GameManager instance;
+    private bool isGameStart= false;
+    public static int levelCount = 1;  // Sahne sayýsý
+private void Awake()
     {
-        
+        if(instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject); // Sahne geçse de kaybolmasýn
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
+    public void ÝncraseLevelCount()
+    {
+        levelCount++;
+    }
+    
+    
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

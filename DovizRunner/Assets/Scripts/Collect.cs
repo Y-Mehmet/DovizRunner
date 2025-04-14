@@ -9,7 +9,7 @@ public class Collect : MonoBehaviour
         ICollectible icoll = other.GetComponent<ICollectible>();
         if (icoll != null)  // Eðer oyuncu kapýya çarptýysa
         {
-
+            
 
             if (supporterCount>0)
             {
@@ -18,6 +18,7 @@ public class Collect : MonoBehaviour
             }
             else
             {
+                SoundManager.instance.PlayGameSound(SoundType.RedDor); // Ses çal
                 // Negatif kapý: Kaybettirici etki
                 icoll.DeCollect(-supporterCount);  // Destekçileri geri al
             }

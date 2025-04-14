@@ -37,12 +37,12 @@ public class ParticleBlinkerManager : MonoBehaviour
             if (i == currentOffIndex)
             {
                 blinkers[i].TurnOff();
-                blinkers[i].GetComponent<BoxCollider>().enabled = false; // Kapatýlan parçacýðýn çarpýþmasýný devre dýþý býrak
+            
             }
             else
             {
                 blinkers[i].TurnOn();
-                blinkers[i].GetComponent<BoxCollider>().enabled = true;
+            
             }
         }
     }

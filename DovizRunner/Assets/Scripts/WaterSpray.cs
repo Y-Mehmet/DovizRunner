@@ -14,6 +14,7 @@ public class WaterSpray : MonoBehaviour
         if (icoll != null)
         {
             icoll.DeCollect(killCount);
+            SoundManager.instance.PlayGameSound(SoundType.Water);
         }
         else
         {

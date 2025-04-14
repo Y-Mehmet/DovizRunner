@@ -1,23 +1,28 @@
+using Unity.VisualScripting;
+using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class RunnerPlayerController : MonoBehaviour, ICollectible
 {
-    public float speed = 5f;         // Ýleri gitme hýzý
-    public float minX = -4f;         // X ekseninin sol sýnýrý
-    public float maxX = 4f;          // X ekseninin sað sýnýrý
-    public float xMoveSpeed = .7f;     // Sað/sol hareket hýzý
+    public float speed = 5f;
+    public float minX = -4f;
+    public float maxX = 4f;
+    public float xMoveSpeed = 0.7f;
 
     private Vector3 targetPosition;
     private PlayerInput playerInput;
     private InputAction moveAction;
 
-    private float moveInputX = 0f;   // Input sisteminden alýnan X hareket deðeri
-    private Rigidbody rb;            // Rigidbody referansý
+    private float moveInputX = 0f;
+    private Rigidbody rb;
 
     public GameObject supporterPrefab;
-    public float supporterDistance = -.2f;
+    public float supporterDistance = -0.2f;
     private int supporterCount = 0;
+    Animator animator;
+
+    private bool isRunning = false;
 
     private void Awake()
     {
@@ -26,24 +31,32 @@ public class RunnerPlayerController : MonoBehaviour, ICollectible
         moveAction = playerInput.actions["Move"];
         moveAction.performed += OnMove;
         moveAction.canceled += OnStopMove;
+
+        isRunning = false;
     }
+
     private void OnEnable()
     {
         moveAction.Enable();
-
-      
+        TouchInput.OnScreenTouched += StartRunning;
     }
 
     private void OnDisable()
     {
         moveAction.Disable();
-
-      
+        TouchInput.OnScreenTouched -= StartRunning;
     }
-
-  
-
-
+    private void Start()
+    {
+        animator = GetComponent<Animator>();
+        animator.SetBool("isRunning", isRunning);
+    }
+    private void StartRunning()
+    {
+        isRunning = true;
+        animator.SetBool("isRunning", isRunning);
+        //Debug.Log("Game Started");
+    }
 
     private void OnMove(InputAction.CallbackContext context)
     {
@@ -57,20 +70,20 @@ public class RunnerPlayerController : MonoBehaviour, ICollectible
 
     private void FixedUpdate()
     {
-        // X ve Y yönünde hareket belirle
+        if (!isRunning)
+        {
+            rb.linearVelocity = Vector3.zero;
+            return;
+        }
+
         float newX = moveInputX * xMoveSpeed;
         float newY = speed;
 
-        // Rigidbody'ye velocity uygula
         rb.linearVelocity = new Vector3(newX, 0, speed);
 
-        // X sýnýrlarýný uygula
         float clampedX = Mathf.Clamp(rb.position.x, minX, maxX);
         rb.position = new Vector3(clampedX, rb.position.y, rb.position.z);
     }
-
-
-
 
     public void SpawnSupporters(int count)
     {
@@ -100,3 +113,4 @@ public class RunnerPlayerController : MonoBehaviour, ICollectible
         LoseSupporters(count);
     }
 }
+

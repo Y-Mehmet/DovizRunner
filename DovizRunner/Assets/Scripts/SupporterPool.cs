@@ -27,7 +27,9 @@ public class SupporterPool : MonoBehaviour
     public float spreadDuration = 5f; // Yayılma süresi (saniye)
     public Action onActiveSupporterCountChanged;
 
+    public AudioSource pikachuSesiKaynagi; // Inspector'dan atayacağınız AudioSource
 
+  
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -129,6 +131,7 @@ public class SupporterPool : MonoBehaviour
         SetSupporerParent(playerTransform.gameObject, supporter);
         SetSuppoerterPos();
         onActiveSupporterCountChanged?.Invoke(); // 🔔 BURAYA EKLEDİK
+        SoundManager.instance.PlayGameSound(SoundType.AddPika,0.05f); // Ses efektini burada çalıyoruz
         return supporter;
     }
 
@@ -147,6 +150,7 @@ public class SupporterPool : MonoBehaviour
 
         }
         onActiveSupporterCountChanged?.Invoke(); // 🔔 BURAYA EKLEDİK
+       // SoundManager.instance.PlayGameSound(SoundType.RedDor); // Ses efektini burada çalıyoruz
         SetSuppoerterPos();
     }
 

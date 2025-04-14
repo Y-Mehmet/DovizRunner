@@ -3,7 +3,7 @@ using UnityEngine;
 public class ParticleBlinker : MonoBehaviour
 {
     public ParticleSystem ps;
-    private bool isOn = false;
+    public  bool isOn = false;
 
     public void TurnOn()
     {
@@ -11,6 +11,8 @@ public class ParticleBlinker : MonoBehaviour
         {
             ps.Play();
             isOn = true;
+           
+
         }
     }
 
@@ -26,5 +28,14 @@ public class ParticleBlinker : MonoBehaviour
     public bool IsOn()
     {
         return isOn;
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        ICollectible icol= other.GetComponent<ICollectible>();
+        if (isOn && icol!= null)
+        {
+            SoundManager.instance.PlayGameSound(SoundType.Fire);
+            icol.DeCollect(1);
+        }
     }
 }
