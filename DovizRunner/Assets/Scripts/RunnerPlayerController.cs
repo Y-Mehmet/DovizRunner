@@ -1,5 +1,4 @@
-using Unity.VisualScripting;
-using UnityEditor.Animations;
+
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -102,7 +101,7 @@ public class RunnerPlayerController : MonoBehaviour, ICollectible
         supporterCount = Mathf.Max(0, supporterCount - count);
         SupporterPool.Instance.ReturnSupporter(count);
     }
-
+    
     public void OnCollect(int count = 1)
     {
         SpawnSupporters(count);
@@ -111,6 +110,14 @@ public class RunnerPlayerController : MonoBehaviour, ICollectible
     public void DeCollect(int count = 1)
     {
         LoseSupporters(count);
+    }
+
+    public void MultiplyCollect(int count = 1)
+    {
+        int temp = supporterCount * count;
+        int addedCount = temp - supporterCount;
+        supporterCount = temp;
+        SpawnSupporters(addedCount);
     }
 }
 

@@ -38,6 +38,7 @@ public enum SoundType
     RedDor,
     Fire,
     Water,
+    Click,
 
 
 }

@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Gate : MonoBehaviour
 {
-    public enum GateType { Positive, Negative }  // Pozitif ve negatif kapýlar
+    public enum GateType { Positive, Negative, PM }  // Pozitif ve negatif kapýlar
     public GateType gateType;  // Kapý türü
     public int supporterCount = 5;  // Kapý geçtiðinde ne kadar destekçi ekleyeceðiz
     public TMP_Text supporterCountText, dovizNameText;
@@ -15,11 +15,14 @@ public class Gate : MonoBehaviour
         // Kapý türüne göre destekçi sayýsýný ayarla
         if (gateType == GateType.Positive)
         {
-            supporterCountText.text = "+" + supporterCount.ToString();
+            supporterCountText.text = "+ " + supporterCount.ToString();
         }
         else if (gateType == GateType.Negative)
         {
-            supporterCountText.text = "-" + supporterCount.ToString();
+            supporterCountText.text = "- " + supporterCount.ToString();
+        }else 
+        {
+            supporterCountText.text = "x " + supporterCount.ToString();
         }
     }
     private void OnTriggerEnter(Collider other)
@@ -38,6 +41,10 @@ public class Gate : MonoBehaviour
             {
                 // Negatif kapý: Kaybettirici etki
                 icoll.DeCollect(supporterCount);  // Destekçileri geri al
+            }
+            else
+            {
+                icoll.MultiplyCollect(supporterCount);  // Destekçileri çarp
             }
 
             // Kapý geçildi, artýk kayboluyor

@@ -17,7 +17,7 @@ public class TouchInput : MonoBehaviour
         }
     }
     public static event System.Action OnScreenTouched;
-    private bool hasTouched = false;
+    public bool hasTouched = false;
     private bool isLoading = true; // Loading durumu
 
     private void Start()
@@ -34,6 +34,7 @@ public class TouchInput : MonoBehaviour
         if (Touchscreen.current != null && Touchscreen.current.primaryTouch.press.wasPressedThisFrame)
         {
             hasTouched = true;
+            SoundManager.instance.PlayGameSound(SoundType.Click); // Ses çal
             OnScreenTouched?.Invoke();
         }
     }

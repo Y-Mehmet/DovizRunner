@@ -10,18 +10,33 @@ private void Awake()
         if(instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(gameObject); // Sahne geçse de kaybolmasýn
+            
         }
         else
         {
             Destroy(gameObject);
         }
     }
+    private void Start()
+    {
+        if (SaveManager.HasSave())
+        {
+            var data = SaveManager.Load();
+           levelCount = data.levelCount;
+        }
+    }
     public void ÝncraseLevelCount()
     {
         levelCount++;
     }
+    public void LoadNextLevel()
+    {
+        ÝncraseLevelCount();
+        TouchInput.Instance.hasTouched = false; // Dokunma geçersiz
+        LoadingUI.Instance.tapToStartPanel.SetActive(true); // Tap to start paneli aktif
+        SceneCycleManager.Instance.LoadNextScene();
+    }
     
-    
+
 
 }

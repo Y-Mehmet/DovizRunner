@@ -26,23 +26,10 @@ public class Supporter : MonoBehaviour, ICollectible
        
     }
 
-    void Start()
+ 
+
+    public void MultiplyCollect(int count = 1)
     {
         
-    }
-
-    void LateUpdate()
-    {
-        //if (playerTransform != null)
-        //{
-        //    Vector3 targetPosition = playerTransform.position + randomOffset;
-        //    targetPosition.y = transform.position.y;
-
-        //    float distance = Vector3.Distance(transform.position, targetPosition);
-        //    if (distance > followDistance)
-        //    {
-        //        transform.position = Vector3.Lerp(transform.position, targetPosition, followSpeed * Time.deltaTime);
-        //    }
-        //}
     }
 }

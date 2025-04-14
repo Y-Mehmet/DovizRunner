@@ -24,6 +24,8 @@ public class SceneCycleManager : MonoBehaviour
         int totalSceneCount = SceneManager.sceneCountInBuildSettings;
 
         int nextSceneIndex = (currentSceneIndex + 1) % totalSceneCount; // Döngü: sona geldiyse baþa dön
+       
+
 
         SceneManager.LoadScene(nextSceneIndex);
     }
