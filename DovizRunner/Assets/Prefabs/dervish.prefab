@@ -573,6 +573,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 28d6780c3291f7d47a98a6c0867a46ed, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5961430576058455721}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 28d6780c3291f7d47a98a6c0867a46ed, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4404903488532287634}
   m_SourcePrefab: {fileID: 100100000, guid: 28d6780c3291f7d47a98a6c0867a46ed, type: 3}
 --- !u!1 &2319260687547480590 stripped
 GameObject:
@@ -594,8 +597,29 @@ MonoBehaviour:
   rotationSpeed: 180
   rotationAxis: {x: 0, y: 0, z: 1}
   dervishType: 0
-  supporterCount: 5
+  supporterCount: 30
   supporterCountText: {fileID: 6591840907189799280}
+--- !u!65 &4404903488532287634
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2319260687547480590}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.6997852, y: 1, z: 4.300544}
+  m_Center: {x: -0.19316697, y: -4.9699285e-15, z: -1.6502719}
 --- !u!4 &3126760252775325876 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 28d6780c3291f7d47a98a6c0867a46ed, type: 3}
@@ -653,6 +677,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5435115313114541151, guid: b7af1376d352775479c0701ea2e65e9c, type: 3}
+      propertyPath: m_Size.x
+      value: 2.2868955
+      objectReference: {fileID: 0}
+    - target: {fileID: 5435115313114541151, guid: b7af1376d352775479c0701ea2e65e9c, type: 3}
+      propertyPath: m_Size.y
+      value: 4.0504036
+      objectReference: {fileID: 0}
+    - target: {fileID: 5435115313114541151, guid: b7af1376d352775479c0701ea2e65e9c, type: 3}
+      propertyPath: m_Center.x
+      value: -0.06954825
+      objectReference: {fileID: 0}
+    - target: {fileID: 5435115313114541151, guid: b7af1376d352775479c0701ea2e65e9c, type: 3}
+      propertyPath: m_Center.y
+      value: 1.5252018
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -684,7 +724,7 @@ MonoBehaviour:
   rotationSpeed: 180
   rotationAxis: {x: 0, y: 1, z: 0}
   dervishType: 1
-  supporterCount: 5
+  supporterCount: 30
   supporterCountText: {fileID: 2288548283314858309}
 --- !u!4 &9128956007787863874 stripped
 Transform:

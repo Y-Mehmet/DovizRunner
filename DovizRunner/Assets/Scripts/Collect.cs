@@ -22,8 +22,7 @@ public class Collect : MonoBehaviour
                 icoll.DeCollect(-supporterCount);  // Destekçileri geri al
             }
 
-            // Kapý geçildi, artýk kayboluyor
-            gameObject.SetActive(false);
+          
         }
     }
 }

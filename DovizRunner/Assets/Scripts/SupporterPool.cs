@@ -21,6 +21,7 @@ public class SupporterPool : MonoBehaviour
     public float rotationSpeed = 30f; // derece/saniye
     private float spreadMultiplier = 1f;
     public float maxSpread = 3f;
+    public float maxXOfset = 3f;
     public float spreadSpeed = 1f;
     private bool isSpreading = false;
     public float spreadDuration = 5f; // Yayılma süresi (saniye)
@@ -104,7 +105,8 @@ public class SupporterPool : MonoBehaviour
         for (int i = 0; i < activeCount; i++)
         {
             Vector2 randomOffset = UnityEngine.Random.insideUnitCircle * currentRadius;
-            Vector3 offset = new Vector3(randomOffset.x, 0f, -Mathf.Abs(randomOffset.y)-.5f);
+            float offY= UnityEngine.Random.Range(-maxXOfset, 0);
+            Vector3 offset = new Vector3((randomOffset.x>maxXOfset?randomOffset.x/2:randomOffset.x), 0f, -Mathf.Abs(randomOffset.y)+ offY);
             supporterOffsets.Add(offset);
             activeSupporters[i].transform.localPosition = offset; // Artık localPosition'ı ayarlıyoruz çünkü parent'a bağlılar
         }
@@ -159,7 +161,7 @@ public class SupporterPool : MonoBehaviour
             supporterPool.Enqueue(obj);
             SetSuppoerterPos();
             onActiveSupporterCountChanged?.Invoke(); // 🔔 BURAYA EKLEDİK
-            Debug.Log("coll ile supporter silindi");
+            
         }
     }
     public int GetActiveCount() => activeSupporters.Count;

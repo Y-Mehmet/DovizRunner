@@ -3,40 +3,28 @@ using UnityEngine;
 public class ParticleBlinker : MonoBehaviour
 {
     public ParticleSystem ps;
-    public float onDuration = 1f;
-    public float minOffDuration = 1f;
-    public float maxOffDuration = 2f;
-
     private bool isOn = false;
-    private float timer;
 
-    void Start()
+    public void TurnOn()
     {
-        timer = 0.1f;
-        ps.Stop();
-    }
-
-    void Update()
-    {
-        timer -= Time.deltaTime;
-
-        if (timer <= 0f)
+        if (!isOn)
         {
-            if (isOn)
-            {
-                // Kapatma zamaný
-                ps.Stop();
-                timer = Random.Range(minOffDuration, maxOffDuration);
-            }
-            else
-            {
-                // Açma zamaný
-                ps.Play();
-                timer = onDuration;
-            }
-
-            isOn = !isOn;
+            ps.Play();
+            isOn = true;
         }
     }
-    
+
+    public void TurnOff()
+    {
+        if (isOn)
+        {
+            ps.Stop();
+            isOn = false;
+        }
+    }
+
+    public bool IsOn()
+    {
+        return isOn;
+    }
 }

@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 4907758814611553947}
   - component: {fileID: 2001685504571976403}
   - component: {fileID: 2561999234027947363}
+  - component: {fileID: 5897367041407677188}
+  - component: {fileID: 2008107892577862712}
   m_Layer: 0
   m_Name: fire
   m_TagString: Untagged
@@ -101,9 +103,40 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ps: {fileID: 4497910615675442827}
-  onDuration: 22
-  minOffDuration: 0.5
-  maxOffDuration: 2
+--- !u!65 &5897367041407677188
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7012499880797394700}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.05, y: 0.050000012, z: 0.41404572}
+  m_Center: {x: 0, y: -0.0000009536744, z: -0.1970235}
+--- !u!114 &2008107892577862712
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7012499880797394700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd40fdcac10c8f649b88a178bb9c2b05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  supporterCount: -1
 --- !u!1001 &4371630970434637383
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -177,8 +210,16 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 198421077076039884, guid: bccc7a794e75b2a44a4b0dac69160b7b, type: 3}
+      propertyPath: looping
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198421077076039884, guid: bccc7a794e75b2a44a4b0dac69160b7b, type: 3}
       propertyPath: lengthInSec
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 198421077076039884, guid: bccc7a794e75b2a44a4b0dac69160b7b, type: 3}
+      propertyPath: playOnAwake
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 198421077076039884, guid: bccc7a794e75b2a44a4b0dac69160b7b, type: 3}
       propertyPath: simulationSpeed
@@ -186,7 +227,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 198421077076039884, guid: bccc7a794e75b2a44a4b0dac69160b7b, type: 3}
       propertyPath: startDelay.scalar
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 198421077076039884, guid: bccc7a794e75b2a44a4b0dac69160b7b, type: 3}
       propertyPath: startDelay.minScalar
@@ -195,6 +236,14 @@ PrefabInstance:
     - target: {fileID: 198421077076039884, guid: bccc7a794e75b2a44a4b0dac69160b7b, type: 3}
       propertyPath: startDelay.minMaxState
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 198421077076039884, guid: bccc7a794e75b2a44a4b0dac69160b7b, type: 3}
+      propertyPath: CollisionModule.enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198421077076039884, guid: bccc7a794e75b2a44a4b0dac69160b7b, type: 3}
+      propertyPath: InitialModule.startSpeed.scalar
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 198421077076039884, guid: bccc7a794e75b2a44a4b0dac69160b7b, type: 3}
       propertyPath: CollisionModule.collisionMessages
@@ -210,40 +259,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 198421077076039884, guid: bccc7a794e75b2a44a4b0dac69160b7b, type: 3}
       propertyPath: InitialModule.startLifetime.minScalar
-      value: 1
+      value: 0.0001
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 1593591274471360, guid: bccc7a794e75b2a44a4b0dac69160b7b, type: 3}
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1973075987484898, guid: bccc7a794e75b2a44a4b0dac69160b7b, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 5176183687864495359}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bccc7a794e75b2a44a4b0dac69160b7b, type: 3}
 --- !u!4 &4369740828800349573 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4317874184272834, guid: bccc7a794e75b2a44a4b0dac69160b7b, type: 3}
   m_PrefabInstance: {fileID: 4371630970434637383}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &4371910793906822821 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1973075987484898, guid: bccc7a794e75b2a44a4b0dac69160b7b, type: 3}
-  m_PrefabInstance: {fileID: 4371630970434637383}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &5176183687864495359
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4371910793906822821}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2cf9900dc24d06440b837643340f45b5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  destructionChance: 3
 --- !u!198 &4497910615675442827 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 198421077076039884, guid: bccc7a794e75b2a44a4b0dac69160b7b, type: 3}

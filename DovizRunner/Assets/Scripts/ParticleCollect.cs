@@ -9,7 +9,7 @@ public class ParticleCollect : MonoBehaviour
         if (icoll != null)  // Eðer oyuncu kapýya çarptýysa
         {
 
-            Debug.Log("collcect fith particale "+other.name);
+           
             icoll.DeCollect(1);
 
                
